@@ -22,5 +22,8 @@ urlpatterns = [
     path('', views.add_show, name="view_products"),
     path('delete/<int:id>/', views.delete_product, name="delete_product"),
     path('<int:id>/', views.update_product, name="update_product"),
+    path('supplier/', views.add_supplier, name="view_supplier"),
+    path('supplier/delete/<int:id>/', views.delete_supplier, name="delete_supplier"),
+    path('supplier/update/<int:id>/', views.update_supplier, name="update_supplier"),
     # path('', views.login, name="login"),
 ]
