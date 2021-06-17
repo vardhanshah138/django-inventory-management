@@ -13,4 +13,18 @@ class Supplier(models.Model):
     name = models.CharField(max_length=70)
     phone = PhoneNumberField()
 
-    
+class Category(models.Model):
+    name = models.CharField(max_length=70)
+
+class SubCategory(models.Model):
+    name = models.CharField(max_length=70)
+
+class Brand(models.Model):
+    name = models.CharField(max_length=70)
+
+class Fabric(models.Model):
+    name = models.CharField(max_length=70)
+
+class ReturnPolicy(models.Model):
+    name = models.CharField(max_length=70)
+

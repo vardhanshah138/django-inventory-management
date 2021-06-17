@@ -1,22 +1,17 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddProduct,SupplierForm
-from .models import Products,Supplier
+from .forms import *
+from .models import *
 # Create your views here.
 def add_show(request):
     if request.method == 'POST':
         p1 = AddProduct(request.POST)
         if p1.is_valid():
-            # p2 = AddProduct(name=p1.cleaned_data['name'],
-            #     type=p1.cleaned_data['type'],
-            #     category=p1.cleaned_data['category']
-            # )
             p1.save()
             p1 = AddProduct()
 
     else:
         p1 = AddProduct()
     products = Products.objects.all()
-    print(dir(products))
     return render(request, 'enroll/view_products.html', {'form':p1,'prod':products})
 
 def delete_product(request, id):
@@ -40,17 +35,12 @@ def add_supplier(request):
     if request.method == 'POST':
         supp = SupplierForm(request.POST)
         if supp.is_valid():
-            # p2 = AddProduct(name=p1.cleaned_data['name'],
-            #     type=p1.cleaned_data['type'],
-            #     category=p1.cleaned_data['category']
-            # )
             supp.save()
             supp = SupplierForm()
 
     else:
         supp = SupplierForm()
     suppliers = Supplier.objects.all()
-    print(dir(suppliers))
     return render(request, 'enroll/view_supplier.html', {'supp_form':supp,'supp':suppliers})
 
 def delete_supplier(request, id):
@@ -69,3 +59,153 @@ def update_supplier(request, id):
         p = Supplier.objects.get(pk=id)
         form_obj = SupplierForm(instance=p)
     return render(request, 'enroll/update_supplier.html', {'form':form_obj})
+
+def add_category(request):
+    if request.method == 'POST':
+        formobj = CategoryForm(request.POST)
+        if formobj.is_valid():
+            
+            formobj.save()
+            formobj = CategoryForm()
+
+    else:
+        formobj = CategoryForm()
+    modobj = Category.objects.all()
+    return render(request, 'enroll/view_category.html', {'obj_form':formobj,'obj_mod':modobj})
+
+def delete_category(request, id):
+    if request.method == 'POST':
+        p = Category.objects.get(pk=id)
+        p.delete()
+        return HttpResponseRedirect('/category')
+
+def update_category(request, id):
+    if request.method == 'POST':
+        p = Category.objects.get(pk=id)
+        form_obj = CategoryForm(request.POST, instance=p)
+        if form_obj.is_valid():
+            form_obj.save()
+    else:
+        p = Category.objects.get(pk=id)
+        form_obj = CategoryForm(instance=p)
+    return render(request, 'enroll/update_category.html', {'form':form_obj})
+
+def add_subcategory(request):
+    if request.method == 'POST':
+        formobj = SubCategoryForm(request.POST)
+        if formobj.is_valid():
+            
+            formobj.save()
+            formobj = SubCategoryForm()
+
+    else:
+        formobj = SubCategoryForm()
+    modobj = SubCategory.objects.all()
+    return render(request, 'enroll/view_subcategory.html', {'obj_form':formobj,'obj_mod':modobj})
+
+def delete_subcategory(request, id):
+    if request.method == 'POST':
+        p = SubCategory.objects.get(pk=id)
+        p.delete()
+        return HttpResponseRedirect('/subcategory')
+
+def update_subcategory(request, id):
+    if request.method == 'POST':
+        p = SubCategory.objects.get(pk=id)
+        form_obj = SubCategoryForm(request.POST, instance=p)
+        if form_obj.is_valid():
+            form_obj.save()
+    else:
+        p = SubCategory.objects.get(pk=id)
+        form_obj = SubCategoryForm(instance=p)
+    return render(request, 'enroll/update_subcategory.html', {'form':form_obj})
+
+def add_brand(request):
+    if request.method == 'POST':
+        formobj = BrandForm(request.POST)
+        if formobj.is_valid():
+            
+            formobj.save()
+            formobj = BrandForm()
+
+    else:
+        formobj = BrandForm()
+    modobj = Brand.objects.all()
+    return render(request, 'enroll/view_brand.html', {'obj_form':formobj,'obj_mod':modobj})
+
+def delete_brand(request, id):
+    if request.method == 'POST':
+        p = Brand.objects.get(pk=id)
+        p.delete()
+        return HttpResponseRedirect('/brand')
+
+def update_brand(request, id):
+    if request.method == 'POST':
+        p = Brand.objects.get(pk=id)
+        form_obj = BrandForm(request.POST, instance=p)
+        if form_obj.is_valid():
+            form_obj.save()
+    else:
+        p = Brand.objects.get(pk=id)
+        form_obj = BrandForm(instance=p)
+    return render(request, 'enroll/update_brand.html', {'form':form_obj})
+
+def add_fabric(request):
+    if request.method == 'POST':
+        formobj = FabricForm(request.POST)
+        if formobj.is_valid():
+            
+            formobj.save()
+            formobj = FabricForm()
+
+    else:
+        formobj = FabricForm()
+    modobj = Fabric.objects.all()
+    return render(request, 'enroll/view_fabric.html', {'obj_form':formobj,'obj_mod':modobj})
+
+def delete_fabric(request, id):
+    if request.method == 'POST':
+        p = Fabric.objects.get(pk=id)
+        p.delete()
+        return HttpResponseRedirect('/fabric')
+
+def update_fabric(request, id):
+    if request.method == 'POST':
+        p = Fabric.objects.get(pk=id)
+        form_obj = FabricForm(request.POST, instance=p)
+        if form_obj.is_valid():
+            form_obj.save()
+    else:
+        p = Fabric.objects.get(pk=id)
+        form_obj = FabricForm(instance=p)
+    return render(request, 'enroll/update_fabric.html', {'form':form_obj})
+
+def add_returnpolicy(request):
+    if request.method == 'POST':
+        formobj = ReturnPolicyForm(request.POST)
+        if formobj.is_valid():
+            
+            formobj.save()
+            formobj = ReturnPolicyForm()
+
+    else:
+        formobj = ReturnPolicyForm()
+    modobj = ReturnPolicy.objects.all()
+    return render(request, 'enroll/view_returnpolicy.html', {'obj_form':formobj,'obj_mod':modobj})
+
+def delete_returnpolicy(request, id):
+    if request.method == 'POST':
+        p = ReturnPolicy.objects.get(pk=id)
+        p.delete()
+        return HttpResponseRedirect('/returnpolicy')
+
+def update_returnpolicy(request, id):
+    if request.method == 'POST':
+        p = ReturnPolicy.objects.get(pk=id)
+        form_obj = ReturnPolicyForm(request.POST, instance=p)
+        if form_obj.is_valid():
+            form_obj.save()
+    else:
+        p = ReturnPolicy.objects.get(pk=id)
+        form_obj = ReturnPolicyForm(instance=p)
+    return render(request, 'enroll/update_returnpolicy.html', {'form':form_obj})
