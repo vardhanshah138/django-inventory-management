@@ -11,6 +11,8 @@
             <tr>
                 <th>Name</th>
                 <th>Phone</th>
+                <th>GST No.</th>
+                <th>Address</th>
                 <th>Actions</th>
             </tr>
             
@@ -19,6 +21,8 @@
                 
                 <td>{{each_supplier.name}}</td>
                 <td>{{each_supplier.phone}}</td>
+                <td>{{each_supplier.gst_no}}</td>
+                <td>{{each_supplier.address}}</td>
                 <td>
                     <a href="{% url 'update_supplier' each_supplier.id %}" class="btn btn-warning">Edit</a>
                     <form action="{% url 'delete_supplier' each_supplier.id %}" class="d-inline" method="post">

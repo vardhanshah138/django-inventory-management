@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'enroll',
     'phonenumber_field',
     'crispy_forms',
+    'gst_field',
 ]
 
 MIDDLEWARE = [

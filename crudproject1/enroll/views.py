@@ -63,7 +63,7 @@ def delete_supplier(request, id):
     if request.method == 'POST':
         p = Supplier.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/supplier')
+        return HttpResponseRedirect('/view_supplier')
 
 def update_supplier(request, id):
     if request.method == 'POST':

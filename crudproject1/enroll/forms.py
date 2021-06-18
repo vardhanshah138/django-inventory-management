@@ -19,10 +19,12 @@ class AddProduct(forms.ModelForm):
 class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier
-        fields = ['name','phone']
+        fields = ['name','phone','gst_no','address']
         widgets = {
             'name': forms.TextInput(attrs={'class':"form-control"}),
             'phone': forms.TextInput(attrs={'class':"form-control"}),
+            'gst_no': forms.TextInput(attrs={'class':"form-control"}),
+            'address': forms.Textarea(attrs={'class':"form-control"}),
         }
 
 class CategoryForm(forms.ModelForm):
