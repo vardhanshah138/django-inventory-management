@@ -30,6 +30,9 @@ class Brand(models.Model):
 class Fabric(models.Model):
     name = models.CharField(max_length=70)
 
+class TaxClass(models.Model):
+    tax_class = models.PositiveSmallIntegerField(null=False, blank=False)
+
 class ReturnPolicy(models.Model):
     name = models.CharField(max_length=70)
 

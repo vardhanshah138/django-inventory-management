@@ -59,6 +59,14 @@ class FabricForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class':"form-control"}),            
         }
 
+class TaxClassForm(forms.ModelForm):
+    class Meta:
+        model = TaxClass
+        fields = ['tax_class']
+        widgets = {
+            'tax_class': forms.TextInput(attrs={'class':"form-control"}),            
+        }
+
 class ReturnPolicyForm(forms.ModelForm):
     class Meta:
         model = ReturnPolicy

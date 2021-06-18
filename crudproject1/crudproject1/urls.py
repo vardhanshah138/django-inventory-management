@@ -45,5 +45,8 @@ urlpatterns = [
     path('login/',views.login_request , name ='login'),
     path('logout/',views.logout_request , name ='logout'),
     path('register/',views.register_request , name ='register'),
+    path('tax_class/',views.add_tax_class , name ='tax_class'),
+    path('tax_class/delete/<int:id>/', views.delete_tax_class, name="delete_tax_class"),
+    path('tax_class/update/<int:id>/', views.update_tax_class, name="update_tax_class"),
 
 ]

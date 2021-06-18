@@ -270,3 +270,36 @@ def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.") 
 	return HttpResponseRedirect('/')
+
+
+def add_tax_class(request):
+    if not request.user.is_authenticated:
+        return login_request(request)
+    if request.method == 'POST':
+        formobj = TaxClassForm(request.POST)
+        if formobj.is_valid():
+            
+            formobj.save()
+            formobj = TaxClassForm()
+
+    else:
+        formobj = TaxClassForm()
+    modobj = TaxClass.objects.all()
+    return render(request, 'enroll/tax_class.html', {'obj_form':formobj,'obj_mod':modobj})
+
+def delete_tax_class(request, id):
+    if request.method == 'POST':
+        p = TaxClass.objects.get(pk=id)
+        p.delete()
+        return HttpResponseRedirect('/tax_class')
+
+def update_tax_class(request, id):
+    if request.method == 'POST':
+        p = TaxClass.objects.get(pk=id)
+        form_obj = TaxClassForm(request.POST, instance=p)
+        if form_obj.is_valid():
+            form_obj.save()
+    else:
+        p = TaxClass.objects.get(pk=id)
+        form_obj = TaxClassForm(instance=p)
+    return render(request, 'enroll/update_tax_class.html', {'form':form_obj})
