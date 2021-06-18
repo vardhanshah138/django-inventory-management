@@ -1,0 +1,15 @@
+{% extends 'enroll/base.html' %}
+
+{% block content %}
+<div class="row">
+<div class="col-sm-4">
+    <h4 class="text-center alert alert-info">Add new Supplier</h4>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ supp_form.as_p }}
+        <input type="submit" value="Add" class="btn btn-success">
+        <a href="{% url 'view_supplier' %}" class="btn btn-info">Back to Supplier List</a>
+    </form>
+</div>
+</div>
+{% endblock content %}

@@ -52,7 +52,12 @@ def add_supplier(request):
     else:
         supp = SupplierForm()
     suppliers = Supplier.objects.all()
-    return render(request, 'enroll/view_supplier.html', {'supp_form':supp,'supp':suppliers})
+    return render(request, 'enroll/add_supplier.html', {'supp_form':supp,'supp':suppliers})
+
+def view_supplier(request):
+    suppliers = Supplier.objects.all()
+    return render(request, 'enroll/view_supplier.html', {'supp':suppliers})
+
 
 def delete_supplier(request, id):
     if request.method == 'POST':
