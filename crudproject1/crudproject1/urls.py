@@ -19,7 +19,9 @@ from enroll import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.add_show, name="view_products"),
+    path('', views.view_products, name="view_products"),
+    path('add_product', views.add_show, name="add_product"),
+    path('update_product', views.update_product, name="update_product"),
     path('delete/<int:id>/', views.delete_product, name="delete_product"),
     path('<int:id>/', views.update_product, name="update_product"),
     path('view_supplier/', views.view_supplier, name="view_supplier"),

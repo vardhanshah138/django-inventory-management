@@ -21,7 +21,11 @@ def add_show(request):
     else:
         p1 = AddProduct()
     products = Products.objects.all()
-    return render(request, 'enroll/view_products.html', {'form':p1,'prod':products})
+    return render(request, 'enroll/add_product.html', {'form':p1,'prod':products})
+
+def view_products(request):
+    products = Products.objects.all()
+    return render(request, 'enroll/view_products.html', {'prod':products})
 
 def delete_product(request, id):
     if request.method == 'POST':
