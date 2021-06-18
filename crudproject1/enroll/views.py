@@ -1,8 +1,17 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
 from .models import *
+from django.contrib.auth import login,authenticate,logout
+from django.contrib import messages #import messages
+from django.contrib.auth.forms import AuthenticationForm #add this
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
+
 def add_show(request):
+    if not request.user.is_authenticated:
+        return login_request(request)
     if request.method == 'POST':
         p1 = AddProduct(request.POST)
         if p1.is_valid():
@@ -20,7 +29,7 @@ def delete_product(request, id):
         p.delete()
         return HttpResponseRedirect('/')
 
-def update_product(request, id):
+def update_product(request, id):   
     if request.method == 'POST':
         p = Products.objects.get(pk=id)
         form_obj = AddProduct(request.POST, instance=p)
@@ -32,6 +41,8 @@ def update_product(request, id):
     return render(request, 'enroll/update_product.html', {'form':form_obj})
 
 def add_supplier(request):
+    if not request.user.is_authenticated:
+        return login_request(request)    
     if request.method == 'POST':
         supp = SupplierForm(request.POST)
         if supp.is_valid():
@@ -61,6 +72,8 @@ def update_supplier(request, id):
     return render(request, 'enroll/update_supplier.html', {'form':form_obj})
 
 def add_category(request):
+    if not request.user.is_authenticated:
+        return login_request(request)
     if request.method == 'POST':
         formobj = CategoryForm(request.POST)
         if formobj.is_valid():
@@ -91,6 +104,8 @@ def update_category(request, id):
     return render(request, 'enroll/update_category.html', {'form':form_obj})
 
 def add_subcategory(request):
+    if not request.user.is_authenticated:
+        return login_request(request)
     if request.method == 'POST':
         formobj = SubCategoryForm(request.POST)
         if formobj.is_valid():
@@ -121,6 +136,8 @@ def update_subcategory(request, id):
     return render(request, 'enroll/update_subcategory.html', {'form':form_obj})
 
 def add_brand(request):
+    if not request.user.is_authenticated:
+        return login_request(request)
     if request.method == 'POST':
         formobj = BrandForm(request.POST)
         if formobj.is_valid():
@@ -151,6 +168,8 @@ def update_brand(request, id):
     return render(request, 'enroll/update_brand.html', {'form':form_obj})
 
 def add_fabric(request):
+    if not request.user.is_authenticated:
+        return login_request(request)
     if request.method == 'POST':
         formobj = FabricForm(request.POST)
         if formobj.is_valid():
@@ -181,6 +200,8 @@ def update_fabric(request, id):
     return render(request, 'enroll/update_fabric.html', {'form':form_obj})
 
 def add_returnpolicy(request):
+    if not request.user.is_authenticated:
+        return login_request(request)
     if request.method == 'POST':
         formobj = ReturnPolicyForm(request.POST)
         if formobj.is_valid():
@@ -209,3 +230,38 @@ def update_returnpolicy(request, id):
         p = ReturnPolicy.objects.get(pk=id)
         form_obj = ReturnPolicyForm(instance=p)
     return render(request, 'enroll/update_returnpolicy.html', {'form':form_obj})
+
+def register_request(request):
+	if request.method == "POST":
+		form = NewUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Registration successful." )
+			return HttpResponseRedirect('/')
+		messages.error(request, "Unsuccessful registration. Invalid information.")
+	form = NewUserForm
+	return render (request,"enroll/register.html", context={"register_form":form})
+
+def login_request(request):
+	if request.method == "POST":
+		form = AuthenticationForm(request, data=request.POST)
+		if form.is_valid():
+			username = form.cleaned_data.get('username')
+			password = form.cleaned_data.get('password')
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				login(request, user)
+				messages.info(request,"You are now logged in as {username}.")
+				return HttpResponseRedirect('/')
+			else:
+				messages.error(request,"Invalid username or password.")
+		else:
+			messages.error(request,"Invalid username or password.")
+	form = AuthenticationForm()
+	return render(request, "enroll/authlogin.html", {"login_form":form})    
+
+def logout_request(request):
+	logout(request)
+	messages.info(request, "You have successfully logged out.") 
+	return HttpResponseRedirect('/')

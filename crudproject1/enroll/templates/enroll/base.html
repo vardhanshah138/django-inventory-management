@@ -19,8 +19,12 @@
 
 
 <div class="page-wrapper chiller-theme toggled">
-  
+
+{% if user.is_authenticated %}
+
   {% include  'enroll/sidebar.html'%}
+
+{% endif %}
 
   <main class="page-content">
     

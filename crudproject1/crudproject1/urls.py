@@ -41,4 +41,8 @@ urlpatterns = [
     path('returnpolicy/delete/<int:id>/', views.delete_returnpolicy, name="delete_returnpolicy"),
     path('returnpolicy/update/<int:id>/', views.update_returnpolicy, name="update_returnpolicy"),
     # path('', views.login, name="login"),
+    path('login/',views.login_request , name ='login'),
+    path('logout/',views.logout_request , name ='logout'),
+    path('register/',views.register_request , name ='register'),
+
 ]
