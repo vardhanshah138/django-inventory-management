@@ -1,0 +1,56 @@
+{% extends 'enroll/base.html' %}
+{% block content %}
+
+<div class="col-sm-12">
+
+    {% if prod %}
+    <h4 class="text-center alert alert-info">Product inventory</h4>
+    <div class="input-group rounded">
+
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>type</th>
+                    <th>Category</th>
+                    <th>Quantity<t/h>
+                    <th>Price</th>
+                    <th>Fabric</th>
+                    <th>Brand</th>
+                    <th>Supplier</th>
+                    <th>Actions</th>
+                </tr>
+                
+                {% for each_product in prod %}
+                <tr>
+                    
+                    <td>{{each_product.id}}</td>
+                    <td>{{each_product.name}}</td>
+                    <td>{{each_product.type}}</td>
+                    <td>{{each_product.category}}</td>
+                    {% comment %} <td>{{each_product.quantity}}</td>
+                    <td>{{each_product.price}}</td>
+                    <td>{{each_product.fabric}}</td>
+                    <td>{{each_product.brand}}</td>
+                    <td>{{each_product.supplier}}</td> {% endcomment %}
+                    <td>
+                        <a href="{% url 'update_inventory_item' each_product.id %}" class="btn btn-warning">Edit</a>
+                        <form action="{% url 'delete_inventory_item' each_product.id %}" class="d-inline" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete" class="btn btn-warning">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                </th>
+            </tbody>
+            
+        </table>
+        {% else %}
+        <h4 class="text-center alert alert-info">No Products added</h4>
+
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
