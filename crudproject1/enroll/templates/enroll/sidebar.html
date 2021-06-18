@@ -15,12 +15,12 @@
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
-        <a href="#">inventory</a>
+        <a href="#">Mantra Fashion</a>
         <div id="close-sidebar">
           <i class="fas fa-times"></i>
         </div>
       </div>
-      <!-- sidebar-header  -->
+      {% comment %} <!-- sidebar-header  -->
       <div class="sidebar-search">
         <div>
           <div class="input-group">
@@ -33,39 +33,17 @@
           </div>
         </div>
       </div>
-      <!-- sidebar-search  -->
+      <!-- sidebar-search  --> {% endcomment %}
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
-            <span>General</span>
+            <span>Something can be added here</span>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-tachometer-alt"></i>
-              <span>Dashboard</span>
-              <span class="badge badge-pill badge-warning">New</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Dashboard 1
-                    <span class="badge badge-pill badge-success">Pro</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Dashboard 2</a>
-                </li>
-                <li>
-                  <a href="#">Dashboard 3</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-shopping-cart"></i>
+              {% comment %} <i class="fa fa-shopping-cart"></i> {% endcomment %}
               <span>Product</span>
-              <span class="badge badge-pill badge-danger">2</span>
+              {% comment %} <span class="badge badge-pill badge-danger">2</span> {% endcomment %}
             </a>
             <div class="sidebar-submenu">
               <ul>
@@ -80,7 +58,7 @@
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="far fa-gem"></i>
+              {% comment %} <i class="far fa-gem"></i> {% endcomment %}
               <span>Products Operation</span>
             </a>
             <div class="sidebar-submenu">
@@ -105,7 +83,7 @@
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-chart-line"></i>
+              {% comment %} <i class="fa fa-chart-line"></i> {% endcomment %}
               <span>Supplier</span>
             </a>
             <div class="sidebar-submenu">
@@ -119,20 +97,28 @@
               </ul>
             </div>
           </li>
+          <li>
+            <a href="{% url 'view_supplier' %}">
+              {% comment %} <i class="fa fa-book"></i> {% endcomment %}
+              <span>GST Class</span>
+              {% comment %} <span class="badge badge-pill badge-primary">Beta</span> {% endcomment %}
+            </a>
+          </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-globe"></i>
+              {% comment %} <i class="fa fa-globe"></i> {% endcomment %}
               <span>Inventory</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="#">Google maps</a>
+                  <a href="#">Add new Stock</a>
+                  <a href="#">View Inventory</a>
                 </li>
               </ul>
             </div>
           </li>
-          <li class="header-menu">
+          {% comment %} <li class="header-menu">
             <span>Extra</span>
           </li>
           <li>
@@ -153,14 +139,14 @@
               <i class="fa fa-folder"></i>
               <span>Examples</span>
             </a>
-          </li>
+          </li> {% endcomment %}
         </ul>
       </div>
       <!-- sidebar-menu  -->
     </div>
     <!-- sidebar-content  -->
     <div class="sidebar-footer">
-      <a href="#">
+      {% comment %} <a href="#">
         <i class="fa fa-bell"></i>
         <span class="badge badge-pill badge-warning notification">3</span>
       </a>
@@ -171,9 +157,10 @@
       <a href="#">
         <i class="fa fa-cog"></i>
         <span class="badge-sonar"></span>
-      </a>
+      </a> {% endcomment %}
       <a href="{% url 'logout' %}">
-        <i class="fa fa-power-off"></i>
+        <i class="fa  fa-power-off"></i>
+        Sign Out
       </a>
     </div>
   </nav>
