@@ -8,85 +8,97 @@ from django.contrib.auth.models import User
 
 
 class AddProduct(forms.ModelForm):
-    category = forms.ModelChoiceField(queryset=Category.objects.all(),widget=forms.Select(attrs={'class':'form-select'}))
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select"}),
+    )
+
     class Meta:
         model = Products
-        fields = ['name','type','category']
+        fields = ["name", "type", "category"]
         widgets = {
-            'name': forms.TextInput(attrs={'class':"form-control"}),
-            'type': forms.TextInput(attrs={'class':"form-control"}),
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "type": forms.TextInput(attrs={"class": "form-control"}),
             # 'category': forms.ChoiceField(),
         }
+
 
 class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier
-        fields = ['name','phone','gst_no','address']
+        fields = ["name", "phone", "gst_no", "address"]
         widgets = {
-            'name': forms.TextInput(attrs={'class':"form-control"}),
-            'phone': forms.TextInput(attrs={'class':"form-control"}),
-            'gst_no': forms.TextInput(attrs={'class':"form-control"}),
-            'address': forms.Textarea(attrs={'class':"form-control"}),
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "phone": forms.TextInput(attrs={"class": "form-control"}),
+            "gst_no": forms.TextInput(attrs={"class": "form-control"}),
+            "address": forms.Textarea(attrs={"class": "form-control"}),
         }
+
 
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ['name']
+        fields = ["name"]
         widgets = {
-            'name': forms.TextInput(attrs={'class':"form-control"}),            
+            "name": forms.TextInput(attrs={"class": "form-control"}),
         }
+
 
 class SubCategoryForm(forms.ModelForm):
     class Meta:
         model = SubCategory
-        fields = ['name']
+        fields = ["name"]
         widgets = {
-            'name': forms.TextInput(attrs={'class':"form-control"}),            
+            "name": forms.TextInput(attrs={"class": "form-control"}),
         }
+
 
 class BrandForm(forms.ModelForm):
     class Meta:
         model = Brand
-        fields = ['name']
+        fields = ["name"]
         widgets = {
-            'name': forms.TextInput(attrs={'class':"form-control"}),            
+            "name": forms.TextInput(attrs={"class": "form-control"}),
         }
+
 
 class FabricForm(forms.ModelForm):
     class Meta:
         model = Fabric
-        fields = ['name']
+        fields = ["name"]
         widgets = {
-            'name': forms.TextInput(attrs={'class':"form-control"}),            
+            "name": forms.TextInput(attrs={"class": "form-control"}),
         }
+
 
 class TaxClassForm(forms.ModelForm):
     class Meta:
         model = TaxClass
-        fields = ['tax_class']
+        fields = ["tax_class"]
         widgets = {
-            'tax_class': forms.TextInput(attrs={'class':"form-control"}),            
+            "tax_class": forms.TextInput(attrs={"class": "form-control"}),
         }
+
 
 class ReturnPolicyForm(forms.ModelForm):
     class Meta:
         model = ReturnPolicy
-        fields = ['name']
+        fields = ["name"]
         widgets = {
-            'name': forms.TextInput(attrs={'class':"form-control"}),            
-        }        
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+        }
+
 
 class NewUserForm(UserCreationForm):
-	email = forms.EmailField(required=True)
+    email = forms.EmailField(required=True)
 
-	class Meta:
-		model = User
-		fields = ("username", "email", "password1", "password2")
+    class Meta:
+        model = User
+        fields = ("username", "email", "password1", "password2")
 
-	def save(self, commit=True):
-		user = super(NewUserForm, self).save(commit=False)
-		user.email = self.cleaned_data['email']
-		if commit:
-			user.save()
-		return user
+    def save(self, commit=True):
+        user = super(NewUserForm, self).save(commit=False)
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user

@@ -2,9 +2,9 @@ from django.http import request
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
 from .models import *
-from django.contrib.auth import login,authenticate,logout
-from django.contrib import messages #import messages
-from django.contrib.auth.forms import AuthenticationForm #add this
+from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages  # import messages
+from django.contrib.auth.forms import AuthenticationForm  # add this
 from django.contrib.auth.decorators import login_required
 
 
@@ -12,23 +12,24 @@ from django.contrib.auth.decorators import login_required
 def login_request(request):
     if request.user.is_authenticated:
         return logout_request(request)
-    else:   
+    else:
         if request.method == "POST":
             form = AuthenticationForm(request, data=request.POST)
             if form.is_valid():
-                username = form.cleaned_data.get('username')
-                password = form.cleaned_data.get('password')
+                username = form.cleaned_data.get("username")
+                password = form.cleaned_data.get("password")
                 user = authenticate(username=username, password=password)
                 if user is not None:
                     login(request, user)
-                    messages.info(request,"You are now logged in as {username}.")
-                    return HttpResponseRedirect('/view_products')
+                    messages.info(request, "You are now logged in as {username}.")
+                    return HttpResponseRedirect("/view_products")
                 else:
-                    messages.error(request,"Invalid username or password.")
+                    messages.error(request, "Invalid username or password.")
             else:
-                messages.error(request,"Invalid username or password.")
+                messages.error(request, "Invalid username or password.")
         form = AuthenticationForm()
-        return render(request, "enroll/authlogin.html", {"login_form":form})    
+        return render(request, "enroll/authlogin.html", {"login_form": form})
+
 
 def validate_login(request):
     if not request.user.is_authenticated:
@@ -37,7 +38,7 @@ def validate_login(request):
 
 def add_show(request):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p1 = AddProduct(request.POST)
         if p1.is_valid():
             p1.save()
@@ -46,23 +47,26 @@ def add_show(request):
     else:
         p1 = AddProduct()
     products = Products.objects.all()
-    return render(request, 'enroll/add_product.html', {'form':p1,'prod':products})
+    return render(request, "enroll/add_product.html", {"form": p1, "prod": products})
+
 
 def view_products(request):
     validate_login(request)
     products = Products.objects.all()
-    return render(request, 'enroll/view_products.html', {'prod':products})
+    return render(request, "enroll/view_products.html", {"prod": products})
+
 
 def delete_product(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Products.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect("/")
+
 
 def update_product(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Products.objects.get(pk=id)
         form_obj = AddProduct(request.POST, instance=p)
         if form_obj.is_valid():
@@ -70,11 +74,12 @@ def update_product(request, id):
     else:
         p = Products.objects.get(pk=id)
         form_obj = AddProduct(instance=p)
-    return render(request, 'enroll/update_product.html', {'form':form_obj})
+    return render(request, "enroll/update_product.html", {"form": form_obj})
+
 
 def add_supplier(request):
-    validate_login(request)   
-    if request.method == 'POST':
+    validate_login(request)
+    if request.method == "POST":
         supp = SupplierForm(request.POST)
         if supp.is_valid():
             supp.save()
@@ -83,24 +88,28 @@ def add_supplier(request):
     else:
         supp = SupplierForm()
     suppliers = Supplier.objects.all()
-    return render(request, 'enroll/add_supplier.html', {'supp_form':supp,'supp':suppliers})
+    return render(
+        request, "enroll/add_supplier.html", {"supp_form": supp, "supp": suppliers}
+    )
+
 
 def view_supplier(request):
     validate_login(request)
     suppliers = Supplier.objects.all()
-    return render(request, 'enroll/view_supplier.html', {'supp':suppliers})
+    return render(request, "enroll/view_supplier.html", {"supp": suppliers})
 
 
 def delete_supplier(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Supplier.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/view_supplier')
+        return HttpResponseRedirect("/view_supplier")
+
 
 def update_supplier(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Supplier.objects.get(pk=id)
         form_obj = SupplierForm(request.POST, instance=p)
         if form_obj.is_valid():
@@ -108,32 +117,37 @@ def update_supplier(request, id):
     else:
         p = Supplier.objects.get(pk=id)
         form_obj = SupplierForm(instance=p)
-    return render(request, 'enroll/update_supplier.html', {'form':form_obj})
+    return render(request, "enroll/update_supplier.html", {"form": form_obj})
+
 
 def add_category(request):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         formobj = CategoryForm(request.POST)
         if formobj.is_valid():
-            
+
             formobj.save()
             formobj = CategoryForm()
 
     else:
         formobj = CategoryForm()
     modobj = Category.objects.all()
-    return render(request, 'enroll/view_category.html', {'obj_form':formobj,'obj_mod':modobj})
+    return render(
+        request, "enroll/view_category.html", {"obj_form": formobj, "obj_mod": modobj}
+    )
+
 
 def delete_category(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Category.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/category')
+        return HttpResponseRedirect("/category")
+
 
 def update_category(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Category.objects.get(pk=id)
         form_obj = CategoryForm(request.POST, instance=p)
         if form_obj.is_valid():
@@ -141,32 +155,39 @@ def update_category(request, id):
     else:
         p = Category.objects.get(pk=id)
         form_obj = CategoryForm(instance=p)
-    return render(request, 'enroll/update_category.html', {'form':form_obj})
+    return render(request, "enroll/update_category.html", {"form": form_obj})
+
 
 def add_subcategory(request):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         formobj = SubCategoryForm(request.POST)
         if formobj.is_valid():
-            
+
             formobj.save()
             formobj = SubCategoryForm()
 
     else:
         formobj = SubCategoryForm()
     modobj = SubCategory.objects.all()
-    return render(request, 'enroll/view_subcategory.html', {'obj_form':formobj,'obj_mod':modobj})
+    return render(
+        request,
+        "enroll/view_subcategory.html",
+        {"obj_form": formobj, "obj_mod": modobj},
+    )
+
 
 def delete_subcategory(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = SubCategory.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/subcategory')
+        return HttpResponseRedirect("/subcategory")
+
 
 def update_subcategory(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = SubCategory.objects.get(pk=id)
         form_obj = SubCategoryForm(request.POST, instance=p)
         if form_obj.is_valid():
@@ -174,32 +195,37 @@ def update_subcategory(request, id):
     else:
         p = SubCategory.objects.get(pk=id)
         form_obj = SubCategoryForm(instance=p)
-    return render(request, 'enroll/update_subcategory.html', {'form':form_obj})
+    return render(request, "enroll/update_subcategory.html", {"form": form_obj})
+
 
 def add_brand(request):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         formobj = BrandForm(request.POST)
         if formobj.is_valid():
-            
+
             formobj.save()
             formobj = BrandForm()
 
     else:
         formobj = BrandForm()
     modobj = Brand.objects.all()
-    return render(request, 'enroll/view_brand.html', {'obj_form':formobj,'obj_mod':modobj})
+    return render(
+        request, "enroll/view_brand.html", {"obj_form": formobj, "obj_mod": modobj}
+    )
+
 
 def delete_brand(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Brand.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/brand')
+        return HttpResponseRedirect("/brand")
+
 
 def update_brand(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Brand.objects.get(pk=id)
         form_obj = BrandForm(request.POST, instance=p)
         if form_obj.is_valid():
@@ -207,32 +233,37 @@ def update_brand(request, id):
     else:
         p = Brand.objects.get(pk=id)
         form_obj = BrandForm(instance=p)
-    return render(request, 'enroll/update_brand.html', {'form':form_obj})
+    return render(request, "enroll/update_brand.html", {"form": form_obj})
+
 
 def add_fabric(request):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         formobj = FabricForm(request.POST)
         if formobj.is_valid():
-            
+
             formobj.save()
             formobj = FabricForm()
 
     else:
         formobj = FabricForm()
     modobj = Fabric.objects.all()
-    return render(request, 'enroll/view_fabric.html', {'obj_form':formobj,'obj_mod':modobj})
+    return render(
+        request, "enroll/view_fabric.html", {"obj_form": formobj, "obj_mod": modobj}
+    )
+
 
 def delete_fabric(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Fabric.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/fabric')
+        return HttpResponseRedirect("/fabric")
+
 
 def update_fabric(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Fabric.objects.get(pk=id)
         form_obj = FabricForm(request.POST, instance=p)
         if form_obj.is_valid():
@@ -240,32 +271,39 @@ def update_fabric(request, id):
     else:
         p = Fabric.objects.get(pk=id)
         form_obj = FabricForm(instance=p)
-    return render(request, 'enroll/update_fabric.html', {'form':form_obj})
+    return render(request, "enroll/update_fabric.html", {"form": form_obj})
+
 
 def add_returnpolicy(request):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         formobj = ReturnPolicyForm(request.POST)
         if formobj.is_valid():
-            
+
             formobj.save()
             formobj = ReturnPolicyForm()
 
     else:
         formobj = ReturnPolicyForm()
     modobj = ReturnPolicy.objects.all()
-    return render(request, 'enroll/view_returnpolicy.html', {'obj_form':formobj,'obj_mod':modobj})
+    return render(
+        request,
+        "enroll/view_returnpolicy.html",
+        {"obj_form": formobj, "obj_mod": modobj},
+    )
+
 
 def delete_returnpolicy(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = ReturnPolicy.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/returnpolicy')
+        return HttpResponseRedirect("/returnpolicy")
+
 
 def update_returnpolicy(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = ReturnPolicy.objects.get(pk=id)
         form_obj = ReturnPolicyForm(request.POST, instance=p)
         if form_obj.is_valid():
@@ -273,51 +311,56 @@ def update_returnpolicy(request, id):
     else:
         p = ReturnPolicy.objects.get(pk=id)
         form_obj = ReturnPolicyForm(instance=p)
-    return render(request, 'enroll/update_returnpolicy.html', {'form':form_obj})
+    return render(request, "enroll/update_returnpolicy.html", {"form": form_obj})
+
 
 def register_request(request):
-	if request.method == "POST":
-		form = NewUserForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			login(request, user)
-			messages.success(request, "Registration successful." )
-			return HttpResponseRedirect('/')
-		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = NewUserForm
-	return render (request,"enroll/register.html", context={"register_form":form})
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful.")
+            return HttpResponseRedirect("/")
+        messages.error(request, "Unsuccessful registration. Invalid information.")
+    form = NewUserForm
+    return render(request, "enroll/register.html", context={"register_form": form})
 
 
 def logout_request(request):
-	logout(request)
-	messages.info(request, "You have successfully logged out.") 
-	return HttpResponseRedirect('/')
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return HttpResponseRedirect("/")
 
 
 def add_tax_class(request):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         formobj = TaxClassForm(request.POST)
         if formobj.is_valid():
-            
+
             formobj.save()
             formobj = TaxClassForm()
 
     else:
         formobj = TaxClassForm()
     modobj = TaxClass.objects.all()
-    return render(request, 'enroll/tax_class.html', {'obj_form':formobj,'obj_mod':modobj})
+    return render(
+        request, "enroll/tax_class.html", {"obj_form": formobj, "obj_mod": modobj}
+    )
+
 
 def delete_tax_class(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = TaxClass.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/tax_class')
+        return HttpResponseRedirect("/tax_class")
+
 
 def update_tax_class(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = TaxClass.objects.get(pk=id)
         form_obj = TaxClassForm(request.POST, instance=p)
         if form_obj.is_valid():
@@ -325,12 +368,12 @@ def update_tax_class(request, id):
     else:
         p = TaxClass.objects.get(pk=id)
         form_obj = TaxClassForm(instance=p)
-    return render(request, 'enroll/update_tax_class.html', {'form':form_obj})
+    return render(request, "enroll/update_tax_class.html", {"form": form_obj})
 
 
 def add_inventory_item(request):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p1 = AddProduct(request.POST)
         if p1.is_valid():
             p1.save()
@@ -339,23 +382,26 @@ def add_inventory_item(request):
     else:
         p1 = AddProduct()
     products = Products.objects.all()
-    return render(request, 'enroll/add_inventory.html', {'form':p1,'prod':products})
+    return render(request, "enroll/add_inventory.html", {"form": p1, "prod": products})
+
 
 def view_inventory_items(request):
     validate_login(request)
     products = Products.objects.all()
-    return render(request, 'enroll/view_inventory.html', {'prod':products})
+    return render(request, "enroll/view_inventory.html", {"prod": products})
+
 
 def delete_inventory_item(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Products.objects.get(pk=id)
         p.delete()
-        return HttpResponseRedirect('/view_inventory_items')
+        return HttpResponseRedirect("/view_inventory_items")
+
 
 def update_inventory_item(request, id):
     validate_login(request)
-    if request.method == 'POST':
+    if request.method == "POST":
         p = Products.objects.get(pk=id)
         form_obj = AddProduct(request.POST, instance=p)
         if form_obj.is_valid():
@@ -363,4 +409,4 @@ def update_inventory_item(request, id):
     else:
         p = Products.objects.get(pk=id)
         form_obj = AddProduct(instance=p)
-    return render(request, 'enroll/update_inventory.html', {'form':form_obj})
+    return render(request, "enroll/update_inventory.html", {"form": form_obj})
