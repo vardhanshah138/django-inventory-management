@@ -40,8 +40,11 @@ def add_show(request):
     validate_login(request)
     if request.method == "POST":
         p1 = AddProduct(request.POST)
+        print("recieved p1")
+        print(p1.is_valid())
         if p1.is_valid():
             p1.save()
+            print("product added successfully")
             p1 = AddProduct()
 
     else:
@@ -53,6 +56,7 @@ def add_show(request):
 def view_products(request):
     validate_login(request)
     products = Products.objects.all()
+    print(products)
     return render(request, "enroll/view_products.html", {"prod": products})
 
 

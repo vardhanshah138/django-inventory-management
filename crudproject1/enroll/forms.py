@@ -7,22 +7,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-class AddProduct(forms.ModelForm):
-    category = forms.ModelChoiceField(
-        queryset=Category.objects.all(),
-        widget=forms.Select(attrs={"class": "form-select"}),
-    )
-
-    class Meta:
-        model = Products
-        fields = ["name", "type", "category"]
-        widgets = {
-            "name": forms.TextInput(attrs={"class": "form-control"}),
-            "type": forms.TextInput(attrs={"class": "form-control"}),
-            # 'category': forms.ChoiceField(),
-        }
-
-
 class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier
@@ -102,3 +86,50 @@ class NewUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class AddProduct(forms.ModelForm):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-8"}),
+    )
+    sub_category = forms.ModelChoiceField(
+        queryset=SubCategory.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-8"}),
+    )
+    fabric_top = forms.ModelChoiceField(
+        queryset=Fabric.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-4"}),
+    )
+    fabric_bottom = forms.ModelChoiceField(
+        queryset=Fabric.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-4"}),
+    )
+    fabric_dupatta = forms.ModelChoiceField(
+        queryset=Fabric.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-4"}),
+    )
+    brand = forms.ModelChoiceField(
+        queryset=Brand.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-4"}),
+    )
+    gst_type = forms.ModelChoiceField(
+        queryset=TaxClass.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-4"}),
+    )
+    return_policy = forms.ModelChoiceField(
+        queryset=ReturnPolicy.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-4"}),
+    )
+    supplier = forms.ModelChoiceField(
+        queryset=Supplier.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-4"}),
+    )
+
+    class Meta:
+        model = Products
+        fields = ["name", "category","sub_category","fabric_top","fabric_bottom","fabric_dupatta","brand","gst_type","return_policy","supplier"]
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            # "type": forms.TextInput(attrs={"class": "form-control"}),
+            "other_info": forms.Textarea(attrs={"class": "form-control"}),
+        }

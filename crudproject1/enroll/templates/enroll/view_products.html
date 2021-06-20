@@ -12,12 +12,12 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>type</th>
                     <th>Category</th>
-                    <th>Quantity<t/h>
-                    <th>Price</th>
+                    <th>SubCategory</th>
                     <th>Fabric</th>
                     <th>Brand</th>
+                    <th>GST Type</th>
+                    <th>Return Policy</th>
                     <th>Supplier</th>
                     <th>Actions</th>
                 </tr>
@@ -27,12 +27,12 @@
                     
                     <td>{{each_product.id}}</td>
                     <td>{{each_product.name}}</td>
-                    <td>{{each_product.type}}</td>
                     <td>{{each_product.category}}</td>
-                    <td>{{each_product.quantity}}</td>
-                    <td>{{each_product.price}}</td>
-                    <td>{{each_product.fabric}}</td>
+                    <td>{{each_product.sub_category}}</td>
+                    <td>Top:{{each_product.fabric_top}},Bottom:{{each_product.fabric_bottom}},Dupatta:{{each_product.fabric_dupatta}}</td>
                     <td>{{each_product.brand}}</td>
+                    <td>{{each_product.gst_type}}</td>
+                    <td>{{each_product.return_policy}}</td>
                     <td>{{each_product.supplier}}</td>
                     <td>
                         <a href="{% url 'update_product' each_product.id %}" class="btn btn-warning">Edit</a>
