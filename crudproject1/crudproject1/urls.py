@@ -19,7 +19,7 @@ from enroll import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.view_products, name="view_products"),
+    path('view_products', views.view_products, name="view_products"),
     path('add_product', views.add_show, name="add_product"),
     path('update_product', views.update_product, name="update_product"),
     path('add_inventory_item', views.add_inventory_item, name="add_inventory_item"),
@@ -48,7 +48,7 @@ urlpatterns = [
     path('returnpolicy/delete/<int:id>/', views.delete_returnpolicy, name="delete_returnpolicy"),
     path('returnpolicy/update/<int:id>/', views.update_returnpolicy, name="update_returnpolicy"),
     # path('', views.login, name="login"),
-    path('login/',views.login_request , name ='login'),
+    path('',views.login_request , name ='login'),
     path('logout/',views.logout_request , name ='logout'),
     path('register/',views.register_request , name ='register'),
     path('tax_class/',views.add_tax_class , name ='tax_class'),
