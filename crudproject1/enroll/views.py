@@ -378,27 +378,27 @@ def update_tax_class(request, id):
 def add_inventory_item(request):
     validate_login(request)
     if request.method == "POST":
-        p1 = AddProduct(request.POST)
+        p1 = InventoryForm(request.POST)
         if p1.is_valid():
             p1.save()
-            p1 = AddProduct()
+            p1 = InventoryForm()
 
     else:
-        p1 = AddProduct()
-    products = Products.objects.all()
+        p1 = InventoryForm()
+    products = Inventory.objects.all()
     return render(request, "enroll/add_inventory.html", {"form": p1, "prod": products})
 
 
 def view_inventory_items(request):
     validate_login(request)
-    products = Products.objects.all()
+    products = Inventory.objects.all()
     return render(request, "enroll/view_inventory.html", {"prod": products})
 
 
 def delete_inventory_item(request, id):
     validate_login(request)
     if request.method == "POST":
-        p = Products.objects.get(pk=id)
+        p = Inventory.objects.get(pk=id)
         p.delete()
         return HttpResponseRedirect("/view_inventory_items")
 
@@ -406,11 +406,11 @@ def delete_inventory_item(request, id):
 def update_inventory_item(request, id):
     validate_login(request)
     if request.method == "POST":
-        p = Products.objects.get(pk=id)
-        form_obj = AddProduct(request.POST, instance=p)
+        p = Inventory.objects.get(pk=id)
+        form_obj = InventoryForm(request.POST, instance=p)
         if form_obj.is_valid():
             form_obj.save()
     else:
-        p = Products.objects.get(pk=id)
-        form_obj = AddProduct(instance=p)
+        p = Inventory.objects.get(pk=id)
+        form_obj = InventoryForm(instance=p)
     return render(request, "enroll/update_inventory.html", {"form": form_obj})

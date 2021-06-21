@@ -56,9 +56,13 @@ class ReturnPolicy(models.Model):
     def __str__(self):
         return self.name
 
+
+
 # Create your models here.
 class Products(models.Model):
     name = models.CharField(max_length=70)
+    price = models.PositiveIntegerField(default=5)
+    weight = models.PositiveIntegerField(default=5)
 
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="category", default="0"
@@ -88,3 +92,12 @@ class Products(models.Model):
         Supplier, on_delete=models.CASCADE, related_name="supplier", default="0"
     )
 
+    def __str__(self):
+        return self.name
+
+class Inventory(models.Model):
+    products = models.ForeignKey(
+        Products, on_delete=models.CASCADE, related_name="products", default="0"
+    )
+    no_of_sets = models.PositiveIntegerField(max_length=70)
+    no_of_piece_per_set = models.PositiveIntegerField(max_length=70)

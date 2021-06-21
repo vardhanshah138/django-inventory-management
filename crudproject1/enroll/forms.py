@@ -127,9 +127,24 @@ class AddProduct(forms.ModelForm):
 
     class Meta:
         model = Products
-        fields = ["name", "category","sub_category","fabric_top","fabric_bottom","fabric_dupatta","brand","gst_type","return_policy","supplier"]
+        fields = ["name", "category","sub_category","fabric_top","fabric_bottom","fabric_dupatta","brand","gst_type","price","weight","return_policy","supplier"]
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
+            "price": forms.TextInput(attrs={"class": "form-control"}),
+            "weight": forms.TextInput(attrs={"class": "form-control"}),
             # "type": forms.TextInput(attrs={"class": "form-control"}),
             "other_info": forms.Textarea(attrs={"class": "form-control"}),
+        }
+
+class InventoryForm(forms.ModelForm):
+    products = forms.ModelChoiceField(
+        queryset=Products.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-8"}),
+    )
+    class Meta:
+        model = Inventory
+        fields = ["products", "no_of_sets","no_of_piece_per_set"]
+        widgets = {
+            "no_of_sets": forms.TextInput(attrs={"class": "form-control"}),
+            "no_of_piece_per_set": forms.TextInput(attrs={"class": "form-control"}),
         }
