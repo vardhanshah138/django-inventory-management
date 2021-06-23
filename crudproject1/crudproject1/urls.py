@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from enroll import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -81,3 +83,6 @@ urlpatterns = [
     path("tax_class/delete/<int:id>/", views.delete_tax_class, name="delete_tax_class"),
     path("tax_class/update/<int:id>/", views.update_tax_class, name="update_tax_class"),
 ]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -4,3 +4,4 @@ phonenumbers
 django-phonenumber-field
 django-gst-field
 black
+Pillow

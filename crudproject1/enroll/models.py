@@ -59,7 +59,8 @@ class ReturnPolicy(models.Model):
 # Create your models here.
 class Products(models.Model):
     name = models.CharField(max_length=70)
-
+    cover_image = models.ImageField(upload_to='images/')
+    
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="category", default="0"
     )
@@ -87,4 +88,13 @@ class Products(models.Model):
     supplier = models.ForeignKey(
         Supplier, on_delete=models.CASCADE, related_name="supplier", default="0"
     )
+    def __str__(self):
+        return self.name
 
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Products,default=None,on_delete=models.CASCADE)
+    images = models.FileField(upload_to = 'product/images/')
+    
+    def __str__(self):
+        return self.post.title

@@ -127,9 +127,7 @@ class AddProduct(forms.ModelForm):
 
     class Meta:
         model = Products
-        fields = ["name", "category","sub_category","fabric_top","fabric_bottom","fabric_dupatta","brand","gst_type","return_policy","supplier"]
+        fields = ["name", "category","sub_category","fabric_top","fabric_bottom","fabric_dupatta","brand","gst_type","return_policy","supplier","cover_image"]
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
-            # "type": forms.TextInput(attrs={"class": "form-control"}),
-            "other_info": forms.Textarea(attrs={"class": "form-control"}),
         }

@@ -39,18 +39,20 @@ def validate_login(request):
 def add_show(request):
     validate_login(request)
     if request.method == "POST":
-        p1 = AddProduct(request.POST)
+        images =request.FILES.getlist('images')
+        p1 = AddProduct(request.POST,request.FILES)
         print("recieved p1")
         print(p1.is_valid())
         if p1.is_valid():
-            p1.save()
-            print("product added successfully")
+            curr_prod=p1.save()
             p1 = AddProduct()
 
+            for img in images:
+                print(img)
+                ProductImage.objects.create(product=curr_prod,images=img)
     else:
         p1 = AddProduct()
-    products = Products.objects.all()
-    return render(request, "enroll/add_product.html", {"form": p1, "prod": products})
+    return render(request, "enroll/add_product.html", {"form": p1})
 
 
 def view_products(request):
