@@ -12,11 +12,10 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>type</th>
-                    <th>Category</th>
-                    <th>Quantity<t/h>
-                    <th>Price</th>
+                    <th>no_of_sets</th>
+                    <th>no_of_piece_per_set</th>
                     <th>Fabric</th>
+                    <th>Price per product</th>
                     <th>Brand</th>
                     <th>Supplier</th>
                     <th>Actions</th>
@@ -26,11 +25,16 @@
                 <tr>
                     
                     <td>{{each_product.id}}</td>
-                    <td>{{each_product.name}}</td>
-                    <td>{{each_product.type}}</td>
-                    <td>{{each_product.category}}</td>
+                    <td>{{each_product.products}}</td>
+                    <td>{{each_product.no_of_sets}}</td>
+                    <td>{{each_product.no_of_piece_per_set}}</td>
+                    <td>{{each_product.products}}</td>
+                    <td>{{each_product.products.price}}</td>
+                    <td>{{each_product.products.brand}}</td>
+                    <td>{{each_product.products.supplier}}</td>
                     {% comment %} <td>{{each_product.quantity}}</td>
                     <td>{{each_product.price}}</td>
+
                     <td>{{each_product.fabric}}</td>
                     <td>{{each_product.brand}}</td>
                     <td>{{each_product.supplier}}</td> {% endcomment %}

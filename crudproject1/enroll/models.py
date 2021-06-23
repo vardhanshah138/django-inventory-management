@@ -56,11 +56,16 @@ class ReturnPolicy(models.Model):
     def __str__(self):
         return self.name
 
+
+
 # Create your models here.
 class Products(models.Model):
     name = models.CharField(max_length=70)
     cover_image = models.ImageField(upload_to='images/')
     
+    price = models.PositiveIntegerField(default=5)
+    weight = models.PositiveIntegerField(default=5)
+
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="category", default="0"
     )
@@ -98,3 +103,11 @@ class ProductImage(models.Model):
     
     def __str__(self):
         return self.post.title
+    
+
+class Inventory(models.Model):
+    products = models.ForeignKey(
+        Products, on_delete=models.CASCADE, related_name="products", default="0"
+    )
+    no_of_sets = models.PositiveIntegerField(max_length=70)
+    no_of_piece_per_set = models.PositiveIntegerField(max_length=70)
