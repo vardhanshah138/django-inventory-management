@@ -40,6 +40,7 @@ def add_show(request):
     validate_login(request)
     if request.method == "POST":
         images =request.FILES.getlist('images')
+        print(request.FILES)
         p1 = AddProduct(request.POST,request.FILES)
         print("recieved p1")
         print(p1.is_valid())
