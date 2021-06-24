@@ -9,6 +9,7 @@
     <table class="table table-hover">
         <tbody>
             <tr>
+                <th>Sr.no</th>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>GST No.</th>
@@ -18,7 +19,7 @@
             
             {% for each_supplier in supp %}
             <tr>
-                
+                <td>{{ forloop.counter }}</td>
                 <td>{{each_supplier.name}}</td>
                 <td>{{each_supplier.phone}}</td>
                 <td>{{each_supplier.gst_no}}</td>

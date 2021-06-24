@@ -17,14 +17,14 @@
     <table class="table table-hover">
         <tbody>
             <tr>
-                
+                <th>Sr.no</th>
                 <th>Name</th>
                 <th>Actions</th>
             </tr>
             
             {% for item in obj_mod %}
             <tr>
-                
+                <td>{{ forloop.counter }}</td>
                 <td>{{item.name}}</td>
                 <td>
                     <a href="{% url 'update_brand' item.id %}" class="btn btn-warning">Edit</a>

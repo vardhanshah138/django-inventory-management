@@ -10,6 +10,7 @@
         <table class="table table-hover">
             <tbody>
                 <tr>
+                    <th>Sr.no</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>no_of_sets</th>
@@ -23,7 +24,7 @@
                 
                 {% for each_product in prod %}
                 <tr>
-                    
+                    <td>{{ forloop.counter }}</td>
                     <td>{{each_product.id}}</td>
                     <td>{{each_product.products}}</td>
                     <td>{{each_product.no_of_sets}}</td>

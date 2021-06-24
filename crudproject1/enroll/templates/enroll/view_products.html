@@ -10,6 +10,7 @@
         <table class="table table-hover">
             <tbody>
                 <tr>
+                    <th>Sr.no</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Category</th>
@@ -24,7 +25,7 @@
                 
                 {% for each_product in prod %}
                 <tr>
-                    
+                    <td>{{ forloop.counter }}</td>
                     <td>{{each_product.id}}</td>
                     <td>{{each_product.name}}</td>
                     <td>{{each_product.category}}</td>
