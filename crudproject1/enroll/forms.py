@@ -90,7 +90,7 @@ class NewUserForm(UserCreationForm):
 class NewProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields= ["role","aadhaar_id","bio"]
+        fields= ["role","aadhaar_id","bio","phone","birth_date"]
 
 class AddProduct(forms.ModelForm):
     category = forms.ModelChoiceField(

@@ -331,7 +331,8 @@ def register_request(request):
             print("hello here")
             user = form.save()
             profile_data = form1.cleaned_data
-            Profile.objects.create(user = user,role = profile_data["role"],bio = profile_data["bio"],aadhaar_id = profile_data["aadhaar_id"])
+            print(profile_data)
+            Profile.objects.create(user = user,role = profile_data["role"],bio = profile_data["bio"],aadhaar_id = profile_data["aadhaar_id"],phone = profile_data["phone"],birth_date = profile_data["birth_date"])
             login(request, user)
             messages.success(request, "Registration successful.")
             return HttpResponseRedirect("/")
