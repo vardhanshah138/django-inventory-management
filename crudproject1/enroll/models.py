@@ -119,4 +119,4 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     phone = PhoneNumberField(null=False, blank=False)
-    aadhaar_id = models.CharField(max_length=12, default="0") 
+    aadhaar_id = models.CharField(max_length=12) 
