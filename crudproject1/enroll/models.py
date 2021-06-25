@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 from phonenumber_field.modelfields import PhoneNumberField
 from gst_field.modelfields import GSTField
@@ -111,3 +112,11 @@ class Inventory(models.Model):
     )
     no_of_sets = models.PositiveIntegerField(max_length=70)
     no_of_piece_per_set = models.PositiveIntegerField(max_length=70)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    role = models.CharField(max_length=70)
+    bio = models.TextField(max_length=500, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    phone = PhoneNumberField(null=False, blank=False)
+    aadhaar_id = models.CharField(max_length=12, default="0") 

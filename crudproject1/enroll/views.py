@@ -324,14 +324,23 @@ def update_returnpolicy(request, id):
 def register_request(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
-        if form.is_valid():
+        form1 = NewProfileForm(request.POST)
+        print(form.is_valid())
+        print(form1.is_valid())
+        if form.is_valid() and form1.is_valid(): 
+            print("hello here")
             user = form.save()
+            profile_data = form1.cleaned_data
+            Profile.objects.create(user = user,role = profile_data["role"],bio = profile_data["bio"],aadhaar_id = profile_data["aadhaar_id"])
             login(request, user)
             messages.success(request, "Registration successful.")
             return HttpResponseRedirect("/")
+        else:
+            print("Wait What!")
         messages.error(request, "Unsuccessful registration. Invalid information.")
-    form = NewUserForm
-    return render(request, "enroll/register.html", context={"register_form": form})
+    form = NewUserForm()
+    form1 = NewProfileForm()
+    return render(request, "enroll/register.html", context={"register_form": form,"profile_form": form1})
 
 
 def logout_request(request):

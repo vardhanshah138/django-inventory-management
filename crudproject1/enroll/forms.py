@@ -87,6 +87,11 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
 
+class NewProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields= ["role","aadhaar_id","bio"]
+
 class AddProduct(forms.ModelForm):
     category = forms.ModelChoiceField(
         queryset=Category.objects.all(),
