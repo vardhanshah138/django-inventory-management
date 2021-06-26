@@ -8,6 +8,7 @@
         {% csrf_token %}
         {{ supp_form.as_p }}
         <input type="submit" value="Add" class="btn btn-success">
+        <input type="reset" value="Reset" class="btn btn-danger">
         <a href="{% url 'view_supplier' %}" class="btn btn-info">Back to Supplier List</a>
     </form>
 </div>
