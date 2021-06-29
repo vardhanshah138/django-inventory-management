@@ -17,7 +17,7 @@
 </head>
 <body>
 
-
+        
 <div class="page-wrapper chiller-theme {% if user.is_authenticated %} toggled {% endif %}">
 
 {% if user.is_authenticated %}
@@ -25,8 +25,18 @@
 {% endif %}
 
   <main class="page-content">
-    
+
        <div class="container mt-5">
+
+               {% for message in messages  %}            
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show message" role="alert">
+                        <strong>Message : </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <a aria-hidden="true">&times;</a>
+                        </button>
+                    </div>
+                {% endfor %}    
+
         <h2 class="text-center alert alert-danger">Inventory Management System</h2>
         {% block content %}
         {% endblock %}
@@ -46,5 +56,14 @@
     <script src="{% static 'enroll/js/popper.js' %}"></script>
     <script src="{% static 'enroll/js/bootstrap.js' %}"></script>
     <script src="{% static 'enroll/js/sidebar.js' %}"></script>
+    <script>
+    $(document).ready(function() {
+        // messages timeout for 10 sec 
+        setTimeout(function() {
+            $('.message').fadeOut('slow');
+        }, 10000); // <-- time in milliseconds, 1000 =  1 sec
+    });
+    </script>
+
 </body>
 </html>
