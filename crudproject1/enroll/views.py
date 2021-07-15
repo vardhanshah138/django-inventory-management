@@ -464,3 +464,7 @@ def password_reset_request(request):
 					return redirect ("done/")
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="enroll/password_reset.html", context={"password_reset_form":password_reset_form})
+
+def view_homepage(request):
+    category = Category.objects.all()
+    return render(request, "enroll/navbar.html",{"category": category})
