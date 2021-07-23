@@ -1,0 +1,7 @@
+django
+django-crispy-forms
+phonenumbers
+django-phonenumber-field
+django-gst-field
+black
+Pillow

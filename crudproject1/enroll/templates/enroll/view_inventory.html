@@ -13,14 +13,11 @@
                     <th>Sr.no</th>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Category</th>
-                    <th>SubCategory</th>
+                    <th>no_of_sets</th>
+                    <th>no_of_piece_per_set</th>
                     <th>Fabric</th>
+                    <th>Price per product</th>
                     <th>Brand</th>
-                    <th>GST Type</th>
-                    <th>Price</th>
-                    <th>Weight</th>
-                    <th>Return Policy</th>
                     <th>Supplier</th>
                     <th>Actions</th>
                 </tr>
@@ -29,19 +26,22 @@
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{each_product.id}}</td>
-                    <td>{{each_product.name}}</td>
-                    <td>{{each_product.category}}</td>
-                    <td>{{each_product.sub_category}}</td>
-                    <td>Top:{{each_product.fabric_top}},Bottom:{{each_product.fabric_bottom}},Dupatta:{{each_product.fabric_dupatta}}</td>
+                    <td>{{each_product.inventory_products}}</td>
+                    <td>{{each_product.no_of_sets}}</td>
+                    <td>{{each_product.no_of_piece_per_set}}</td>
+                    <td>{{each_product.products}}</td>
+                    <td>{{each_product.products.price}} Rs</td>
+                    <td>{{each_product.products.brand}}</td>
+                    <td>{{each_product.products.supplier}}</td>
+                    {% comment %} <td>{{each_product.quantity}}</td>
+                    <td>{{each_product.price}}</td>
+
+                    <td>{{each_product.fabric}}</td>
                     <td>{{each_product.brand}}</td>
-                    <td>{{each_product.gst_type}}</td>
-                    <td>{{each_product.price}} Rs</td>
-                    <td>{{each_product.weight}} kg</td>
-                    <td>{{each_product.return_policy}}</td>
-                    <td>{{each_product.supplier}}</td>
+                    <td>{{each_product.supplier}}</td> {% endcomment %}
                     <td>
-                        <a href="{% url 'update_product' each_product.id %}" class="btn btn-warning">Edit</a>
-                        <form action="{% url 'delete_product' each_product.id %}" class="d-inline" method="post">
+                        <a href="{% url 'update_inventory_item' each_product.id %}" class="btn btn-warning">Edit</a>
+                        <form action="{% url 'delete_inventory_item' each_product.id %}" class="d-inline" method="post">
                             {% csrf_token %}
                             <input type="submit" value="Delete" class="btn btn-warning">
                         </form>

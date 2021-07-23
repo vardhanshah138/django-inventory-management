@@ -1,0 +1,195 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'enroll/css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'enroll/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">        
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+</head>
+<body>
+  <a id="show-sidebar" class="btn btn-dark" href="#" style="width:90px">
+    <span>Menu</span>
+    <i class="fas fa-bars fa-lg"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <i><img src="{% static 'enroll/images/img1.png' %} " width="250px" height="60px" ></i>
+      <div class="sidebar-brand">
+        
+        <a href="#">Mantra Fashion</a>
+        <div id="close-sidebar">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      {% comment %} <!-- sidebar-header  -->
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Search...">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- sidebar-search  --> {% endcomment %}
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>Something can be added here</span>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-shopping-cart"></i>
+              <span>Product</span>
+              {% comment %} <span class="badge badge-pill badge-danger">2</span> {% endcomment %}
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="{% url 'add_product' %}">Add Products</a>
+                </li>
+                <li>
+                  <a href="{% url 'view_products' %}">Display Products</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-shopping-cart"></i>
+              <span>Orders</span>
+              {% comment %} <span class="badge badge-pill badge-danger">2</span> {% endcomment %}
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="{% url 'add_order_item' %}">Add Order item</a>
+                </li>
+                <li>
+                  <a href="{% url 'view_order_items' %}">Display Orders</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="far fa-gem"></i>
+              <span>Products Operation</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="{% url 'view_category' %}">Category</a>
+                </li>
+                <li>
+                  <a href="{% url 'view_subcategory' %}">Sub Category</a>
+                </li>
+                <li>
+                  <a href="{% url 'view_brand' %}">Brands</a>
+                </li>
+                <li>
+                  <a href="{% url 'view_fabric' %}">Fabric</a>
+                </li>                
+                <li>
+                  <a href="{% url 'view_returnpolicy' %}">Return Policy</a>
+                </li>                
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-chart-line"></i>
+              <span>Supplier</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="{% url 'add_supplier' %}">Add Supplier</a>
+                </li>
+                <li>
+                  <a href="{% url 'view_supplier' %}">View Supplier</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="{% url 'tax_class' %}">
+              <i class="fa fa-book"></i>
+              <span>GST Class</span>
+              {% comment %} <span class="badge badge-pill badge-primary">Beta</span> {% endcomment %}
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-globe"></i>
+              <span>Inventory</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="{% url 'add_inventory_item' %}">Add new Stock</a>
+                  <a href="{% url 'view_inventory_items' %}">View Inventory</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-book"></i>
+              <span>About[WIP]</span>
+              <span class="badge badge-pill badge-primary">Beta</span>
+            </a>
+          </li>
+          {% comment %} <li class="header-menu">
+            <span>Extra</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-book"></i>
+              <span>Documentation</span>
+              <span class="badge badge-pill badge-primary">Beta</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-calendar"></i>
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-folder"></i>
+              <span>Examples</span>
+            </a>
+          </li> {% endcomment %}
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    <div class="sidebar-footer">
+      {% comment %} <a href="#">
+        <i class="fa fa-bell"></i>
+        <span class="badge badge-pill badge-warning notification">3</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-envelope"></i>
+        <span class="badge badge-pill badge-success notification">7</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-cog"></i>
+        <span class="badge-sonar"></span>
+      </a> {% endcomment %}
+      <a href="{% url 'logout' %}">
+        <i class="fa  fa-power-off"></i>
+        Sign Out
+      </a>
+    </div>
+  </nav>
+  <script src="{% static 'enroll/js/sidebar.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'enroll/base.html' %}
+
+{% block content %}
+<div class="row">
+<div class="col-sm-4">
+    <h4 class="text-center alert alert-info">Add new Tax Class</h4>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ obj_form.as_p }}
+        <input type="submit" value="Add" class="btn btn-success">
+    </form>
+</div>
+<div class="col-sm-8">
+    {% if obj_mod %}
+    <h4 class="text-center alert alert-info">Tax Class</h4>
+    
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+            
+            {% for item in obj_mod %}
+            <tr>
+                
+                <td>{{item.tax_class}} %</td>
+                <td>
+                    <a href="{% url 'update_tax_class' item.id %}" class="btn btn-warning">Edit</a>
+                    <form action="{% url 'delete_tax_class' item.id %}" class="d-inline" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete" class="btn btn-warning">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </th>
+        </tbody>
+        
+    </table>
+    {% else %}
+    <h4 class="text-center alert alert-info">No Tax Class added</h4>
+
+    {% endif %}
+</div>
+</div>
+{% endblock content %}
