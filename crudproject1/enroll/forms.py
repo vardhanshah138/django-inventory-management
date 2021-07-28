@@ -21,7 +21,8 @@ class SupplierForm(forms.ModelForm):
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ["name"]
+        fields = ["name","cover_image"]
+        cover_image = forms.ImageField()
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
         }

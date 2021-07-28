@@ -8,6 +8,7 @@ from gst_field.modelfields import GSTField
 
 class Category(models.Model):
     name = models.CharField(max_length=70)
+    cover_image = models.ImageField(upload_to='category_images/')
 
     def __str__(self):
         return self.name
@@ -62,7 +63,7 @@ class ReturnPolicy(models.Model):
 # Create your models here.
 class Products(models.Model):
     name = models.CharField(max_length=70)
-    cover_image = models.ImageField(upload_to='images/')
+    cover_image = models.ImageField(upload_to='product_images/')
     
     price = models.PositiveIntegerField(default=0)
     weight = models.PositiveIntegerField(default=0)

@@ -19,6 +19,7 @@
             <tr>
                 <th>Sr.no</th>
                 <th>Name</th>
+                <th>Category Image</th>
                 <th>Actions</th>
             </tr>
             
@@ -26,11 +27,13 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{item.name}}</td>
+                <td><img class="img-fluid img-thumbnail" src="{{item.cover_image.url}}"/></td>
                 <td>
                     <a href="{% url 'update_category' item.id %}" class="btn btn-warning">Edit</a>
+                    <br />
                     <form action="{% url 'delete_category' item.id %}" class="d-inline" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Delete" class="btn btn-warning">
+                        <input type="submit" value="Delete Category" class="btn btn-warning">
                     </form>
                 </td>
             </tr>
