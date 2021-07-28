@@ -8,7 +8,7 @@ from gst_field.modelfields import GSTField
 
 class Category(models.Model):
     name = models.CharField(max_length=70)
-    cover_image = models.ImageField(upload_to='category_images/')
+    cover_image = models.ImageField(upload_to='category_images/',blank=True)
 
     def __str__(self):
         return self.name

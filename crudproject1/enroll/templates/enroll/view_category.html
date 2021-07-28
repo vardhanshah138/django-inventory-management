@@ -4,7 +4,7 @@
 <div class="row">
 <div class="col-sm-4">
     <h4 class="text-center alert alert-info">Add new Category</h4>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ obj_form.as_p }}
         <input type="submit" value="Add" class="btn btn-success">
@@ -27,7 +27,14 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{item.name}}</td>
-                <td><img class="img-fluid img-thumbnail" src="{{item.cover_image.url}}"/></td>
+                
+                <td>
+                    {% if item.cover_image %}
+                        <img class="img-fluid img-thumbnail" src="{{item.cover_image.url}}"/>
+                    {% else %}
+                        No Image added
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{% url 'update_category' item.id %}" class="btn btn-warning">Edit</a>
                     <br />
