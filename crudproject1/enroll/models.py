@@ -16,7 +16,6 @@ class Category(models.Model):
 class Supplier(models.Model):
     name = models.CharField(max_length=70)
     phone = PhoneNumberField(null=False, blank=False)
-    # phone = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')])
     gst_no = GSTField(null=False, blank=False)
     address = models.CharField(max_length=300)
 
@@ -26,7 +25,9 @@ class Supplier(models.Model):
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=70)
-
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="parent_category"
+    )
     def __str__(self):
         return self.name
 

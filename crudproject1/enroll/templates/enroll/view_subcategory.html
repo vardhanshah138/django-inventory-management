@@ -19,6 +19,7 @@
             <tr>
                 <th>Sr.no</th>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Actions</th>
             </tr>
             
@@ -26,6 +27,7 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{item.name}}</td>
+                <td>{{item.category}}</td>
                 <td>
                     <a href="{% url 'update_subcategory' item.id %}" class="btn btn-warning">Edit</a>
                     <form action="{% url 'delete_subcategory' item.id %}" class="d-inline" method="post">

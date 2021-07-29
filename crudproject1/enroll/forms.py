@@ -27,9 +27,13 @@ class CategoryForm(forms.ModelForm):
         }
 
 class SubCategoryForm(forms.ModelForm):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-8"}),
+    )
     class Meta:
         model = SubCategory
-        fields = ["name"]
+        fields = "__all__"
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
         }
