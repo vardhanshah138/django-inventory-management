@@ -21,15 +21,19 @@ class SupplierForm(forms.ModelForm):
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ["name"]
+        fields = "__all__"
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 class SubCategoryForm(forms.ModelForm):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        widget=forms.Select(attrs={"class": "form-select col-sm-8"}),
+    )
     class Meta:
         model = SubCategory
-        fields = ["name"]
+        fields = "__all__"
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
         }

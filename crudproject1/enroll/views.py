@@ -133,9 +133,8 @@ def update_supplier(request, id):
 def add_category(request):
     validate_login(request)
     if request.method == "POST":
-        formobj = CategoryForm(request.POST)
+        formobj = CategoryForm(request.POST,request.FILES)
         if formobj.is_valid():
-
             formobj.save()
             formobj = CategoryForm()
 
@@ -145,7 +144,6 @@ def add_category(request):
     return render(
         request, "enroll/view_category.html", {"obj_form": formobj, "obj_mod": modobj}
     )
-
 
 def delete_category(request, id):
     validate_login(request)
@@ -159,7 +157,7 @@ def update_category(request, id):
     validate_login(request)
     if request.method == "POST":
         p = Category.objects.get(pk=id)
-        form_obj = CategoryForm(request.POST, instance=p)
+        form_obj = CategoryForm(request.POST,request.FILES, instance=p)
         if form_obj.is_valid():
             form_obj.save()
     else:

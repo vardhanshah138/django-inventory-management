@@ -11,7 +11,6 @@
             <tbody>
                 <tr>
                     <th>Sr.no</th>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Category</th>
                     <th>SubCategory</th>
@@ -28,13 +27,14 @@
                 {% for each_product in prod %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{each_product.id}}</td>
                     <td>{{each_product.name}}</td>
                     <td>{{each_product.category}}</td>
                     <td>{{each_product.sub_category}}</td>
-                    <td>Top:{{each_product.fabric_top}} <br />
-                    Bottom:{{each_product.fabric_bottom}} <br />
-                    Dupatta:{{each_product.fabric_dupatta}}</td>
+                    <td>
+                        Top:{{each_product.fabric_top}} <br />
+                        Bottom:{{each_product.fabric_bottom}} <br />
+                        Dupatta:{{each_product.fabric_dupatta}}
+                    </td>
                     <td>{{each_product.brand}}</td>
                     <td>{{each_product.gst_type}}</td>
                     <td>{{each_product.price}} Rs</td>
