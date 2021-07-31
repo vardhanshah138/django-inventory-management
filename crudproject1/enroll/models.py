@@ -105,7 +105,7 @@ class ProductImage(models.Model):
     images = models.FileField(upload_to = 'product/images/')
     
     def __str__(self):
-        return self.post.title
+        return self.product.name
     
 
 class Inventory(models.Model):

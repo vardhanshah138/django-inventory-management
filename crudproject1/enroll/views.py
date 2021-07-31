@@ -487,3 +487,8 @@ def delete_order_item(request, id):
         associated_product.save()
         return HttpResponseRedirect("/view_order_items")
 
+def view_product_images(request,id):
+    validate_login(request)
+    prod = get_object_or_404(Products, pk=id)
+    images = ProductImage.objects.filter(product=prod)
+    return render(request, "enroll/view_product_images.html", {"images": images, "cover_image": prod.cover_image})

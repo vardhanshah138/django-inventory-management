@@ -134,7 +134,6 @@ class AddProduct(forms.ModelForm):
             "name": forms.TextInput(attrs={"class": "form-control"}),
             "price": forms.TextInput(attrs={"class": "form-control"}),
             "weight": forms.TextInput(attrs={"class": "form-control"}),
-            # "type": forms.TextInput(attrs={"class": "form-control"}),
             "other_info": forms.Textarea(attrs={"class": "form-control"}),
         }
 

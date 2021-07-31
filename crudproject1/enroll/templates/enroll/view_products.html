@@ -21,6 +21,7 @@
                     <th>Weight</th>
                     <th>Return Policy</th>
                     <th>Supplier</th>
+                    <th>Product Images</th>
                     <th>Actions</th>
                 </tr>
                 
@@ -41,6 +42,7 @@
                     <td>{{each_product.weight}} kg</td>
                     <td>{{each_product.return_policy}}</td>
                     <td>{{each_product.supplier}}</td>
+                    <td><a href="{% url 'view_product_images' each_product.id %}" class="btn btn-warning">View Images</a></td>
                     <td>
                         <a href="{% url 'update_product' each_product.id %}" class="btn btn-warning">Edit</a>
                         <form action="{% url 'delete_product' each_product.id %}" class="d-inline" method="post">
