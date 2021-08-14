@@ -1,7 +1,7 @@
 # django-inventory-management
 Developed an Inventory management website using Django Framework having MySQL Database. Where Admin can easily manage inventory stocks and update regular products.
 ## Skills Used
-Django,HTML,CSS,JS,Bootstrap.
+Django,SQL,HTML,CSS,JS,Bootstrap.
 
 Steps to Run
 ------------
