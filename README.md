@@ -1,5 +1,7 @@
 # django-inventory-management
-A basic Inventory management project in Django
+Developed an Inventory management website using Django Framework having MySQL Database. Where Admin can easily manage inventory stocks and update regular products.
+## Skills Used
+Django,HTML,CSS,JS,Bootstrap.
 
 Steps to Run
 ------------
